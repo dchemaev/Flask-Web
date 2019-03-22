@@ -11,9 +11,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 from controller import init_route
 from dbase import db
+from cryptography.fernet import Fernet
+
+cipher_key = Fernet.generate_key()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config['SECRET_KEY'] = cipher_key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
