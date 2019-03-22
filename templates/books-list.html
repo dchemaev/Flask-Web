@@ -1,0 +1,25 @@
+{% extends "__base_template.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Мои книги</h5>
+        {% if books_list %}
+        <ul class="card-text">
+            {% for book in books_list %}
+            <li><a href="/book/{{ news.id }}">{{book.title}} </a>
+                {% if auth_user and auth_user.id == book.user_id %}
+                (<a href="/book/delete/{{ book.id }}">удалить</a>)
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        Книг пока нет
+        {% endif %}
+        {% if auth_user %}
+        <a href="/book/create" class="card-link">Создать</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
