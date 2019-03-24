@@ -18,7 +18,7 @@ class BooksListApi(Resource):
 
     def get(self):
         books = Books.query.all()
-        return jsonify(news=[i.serialize for i in books])
+        return jsonify(books=[i.serialize for i in books])
 
     def post(self):
         if not self._auth.is_authorized():
