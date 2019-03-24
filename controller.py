@@ -10,7 +10,6 @@ from models import User, Books
 
 
 def init_route(app, db):
-
     # Переопределение стандартного рендера, добавляет параметр auth_user
     def render_template(*args, **kwargs):
         kwargs['auth_user'] = auth.get_user()
@@ -124,9 +123,11 @@ def init_route(app, db):
         user = Book.user
         return render_template(
             'books-view.html',
-            title='Книга - ' + Books.title,
-            News=Book,
-            user=user
+            title='Книга - ' + Book.title,
+            Book=Book,
+            content=Book.content,
+            user=user,
+            link=Book.link
         )
 
     @app.route('/book/delete/<int:id>')

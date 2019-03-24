@@ -7,7 +7,7 @@
         {% if books_list %}
         <ul class="card-text">
             {% for book in books_list %}
-            <li><a href="/book/{{ news.id }}">{{book.title}} </a>
+            <li><a href="/book/{{ book.id }}">{{book.title}} </a>
                 {% if auth_user and auth_user.id == book.user_id %}
                 (<a href="/book/delete/{{ book.id }}">удалить</a>)
                 {% endif %}

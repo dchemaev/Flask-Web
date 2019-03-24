@@ -56,5 +56,6 @@ class Books(db.Model):
             'id': self.id,
             'title': self.title,
             'content': self.content,
+            'link': self.link,
             'user_id': self.user_id
         }
