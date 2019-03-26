@@ -29,7 +29,7 @@ def init_route(app, db):
         return render_template(
             'books-list.html',
             title="Мои книги",
-            book_list=all_book_list
+            books_list=all_book_list
         )
 
     @app.route('/install')
@@ -111,7 +111,7 @@ def init_route(app, db):
             form=form
         )
 
-    @app.route('/books/<int:id>')
+    @app.route('/book/<int:id>')
     def Books_view(id: int):
         if not auth.is_authorized():
             return redirect('/login')
@@ -124,7 +124,7 @@ def init_route(app, db):
         return render_template(
             'books-view.html',
             title='Книга - ' + Book.title,
-            Book=Book,
+            book=Book,
             content=Book.content,
             user=user,
             link=Book.link
@@ -139,3 +139,5 @@ def init_route(app, db):
             abort(403)
         Book.delete(Book)
         return redirect('/Book')
+
+
