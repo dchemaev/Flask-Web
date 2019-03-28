@@ -4,7 +4,8 @@ from wtforms.validators import DataRequired
 
 
 class BooksCreateForm(FlaskForm):
-    title = StringField('Заголовок книги', validators=[DataRequired()])
+    title = StringField('Название книги', validators=[DataRequired()])
+    author = StringField('Автор Книги', validators=[DataRequired()])
     content = TextAreaField('Описание', validators=[DataRequired()])
     link = StringField('Ссылка на источник', validators=[DataRequired()])
     submit = SubmitField('Добавить')

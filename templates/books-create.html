@@ -15,6 +15,10 @@
             {{ form.title(class_="form-control") }}
         </div>
         <div class="form-group">
+            <label for="{{ form.author.id }}">{{ form.author.label }}</label>
+            {{ form.author(class_="form-control") }}
+        </div>
+        <div class="form-group">
             <label for="{{ form.content.id }}">{{ form.content.label }}</label>
             {{ form.content(class_="form-control") }}
         </div>

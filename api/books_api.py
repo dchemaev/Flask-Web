@@ -7,6 +7,7 @@ from models import Books
 
 books_parser = reqparse.RequestParser()
 books_parser.add_argument('title', required=True)
+books_parser.add_argument('author', required=True)
 books_parser.add_argument('content', required=True)
 books_parser.add_argument('link', required=True)
 
@@ -24,7 +25,7 @@ class BooksListApi(Resource):
         if not self._auth.is_authorized():
             abort(401)
         args = books_parser.parse_args()
-        books = Books.add(args['title'], args['content'], args['link'], self._auth.get_user())
+        books = Books.add(args['title'], args['author'], args['content'], args['link'], self._auth.get_user())
         return jsonify(books.serialize)
 
 

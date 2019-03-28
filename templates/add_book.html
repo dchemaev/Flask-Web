@@ -13,10 +13,29 @@
                 </div>
             {% endfor %}
         </p>
+        <form action="" method="post" novalidate>
+        <p>
+            {{ form.author.label }}<br>
+            {{ form.author }}<br>
+            {% for error in form.author.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
         <p>
             {{ form.content.label }}<br>
             {{ form.content }}<br>
             {% for error in form.content.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.link.label }}<br>
+            {{ form.link }}<br>
+            {% for error in form.link.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>

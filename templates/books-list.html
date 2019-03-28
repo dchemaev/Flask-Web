@@ -3,13 +3,18 @@
 {% block content %}
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Мои книги</h5>
+        <h1 class="card-title">Мои книги:</h1>
         {% if books_list %}
         <ul class="card-text">
             {% for book in books_list %}
-            <li><a href="/book/{{ book.id }}">{{book.title}} </a>
+            <li><h4><b><a href="/book/{{ book.id }}"> <font face="Helvetica" color="Brown">{{book.title}}</font></a></b></h4>
+                <img src={{book.link}} alt="Ошибка загрузки картики">
+
                 {% if auth_user and auth_user.id == book.user_id %}
-                (<a href="/book/delete/{{ book.id }}">удалить</a>)
+                (<a href="/book/delete/{{ book.id }}"> <font face="Helvetica" color="Red">Удалить книгу</font></a>)
+                <p></p>
+                <p></p>
+
                 {% endif %}
             </li>
             {% endfor %}

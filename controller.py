@@ -101,9 +101,10 @@ def init_route(app, db):
         form = BooksCreateForm()
         if form.validate_on_submit():
             title = form.title.data
+            author = form.author.data
             content = form.content.data
             link = form.link.data
-            Books.add(title=title, content=content, link=link, user=auth.get_user())
+            Books.add(title=title, author=author, content=content, link=link, user=auth.get_user())
             return redirect('/')
         return render_template(
             'books-create.html',
@@ -125,6 +126,7 @@ def init_route(app, db):
             'books-view.html',
             title='Книга - ' + Book.title,
             book=Book,
+            author=Book.author,
             content=Book.content,
             user=user,
             link=Book.link
@@ -134,10 +136,10 @@ def init_route(app, db):
     def Book_delete(id: int):
         if not auth.is_authorized():
             return redirect('/login')
-        Book = Books.query.filter_by(id=id).first()
+        book = Books.query.filter_by(id=id).first()
         if Books.user_id != auth.get_user().id:
             abort(403)
-        Book.delete(Book)
-        return redirect('/Book')
+        book.delete(book)
+        return redirect('/book')
 
 

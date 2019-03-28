@@ -24,6 +24,7 @@ class User(db.Model):
 class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), unique=False, nullable=False)
+    author = db.Column(db.String(80), unique=False, nullable=False)
     content = db.Column(db.String(80), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     # user_id - вторичный ключ, который связывает 2 таблицы
@@ -38,8 +39,8 @@ class Books(db.Model):
         return '<Books {} {} {}>'.format(self.id, self.title, self.user_id)
 
     @staticmethod
-    def add(title, content, link, user):
-        book = Books(title=title, content=content, link=link, user=user)
+    def add(title, author, content, link, user):
+        book = Books(title=title, author=author, content=content, link=link, user=user)
         db.session.add(book)
         db.session.commit()
         return book
@@ -55,6 +56,7 @@ class Books(db.Model):
         return {
             'id': self.id,
             'title': self.title,
+            'author': self.author,
             'content': self.content,
             'link': self.link,
             'user_id': self.user_id
