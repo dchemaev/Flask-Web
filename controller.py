@@ -32,6 +32,20 @@ def init_route(app, db):
             books_list=all_book_list
         )
 
+    @app.route('/dark_index')
+    def dark_index():
+        if not auth.is_authorized():
+            return render_template(
+                'dark_index.html',
+                title='Главная',
+            )
+        all_book_list = Books.query.filter_by(user_id=auth.get_user().id)
+        return render_template(
+            'books-list.html',
+            title="Мои книги",
+            books_list=all_book_list
+        )
+
     @app.route('/install')
     def install():
         db.create_all()
@@ -52,6 +66,23 @@ def init_route(app, db):
                 has_error = True
         return render_template(
             'login.html',
+            title='Вход',
+            login=login,
+            has_error=has_error
+        )
+
+    @app.route('/dark_login', methods=['GET', 'POST'])
+    def dark_login():
+        has_error = False
+        login = ''
+        if request.method == 'POST':
+            username = request.form['username']
+            if auth.login(username, request.form['password']):
+                return redirect('/')
+            else:
+                has_error = True
+        return render_template(
+            'dark_login.html',
             title='Вход',
             login=login,
             has_error=has_error
@@ -78,6 +109,27 @@ def init_route(app, db):
                 return redirect('/')
         return render_template(
             'registration.html',
+            title='Зарегистрироваться',
+            form=form,
+            has_error=has_error
+        )
+
+    @app.route('/user/dark_create', methods=['GET', 'POST'])
+    def dark_registration():
+        has_error = False
+        form = UserCreateForm()
+        if form.validate_on_submit():
+            username = form.username.data
+            password = form.password.data
+            user = User.query.filter_by(username=username).first()
+            if user:
+                has_error = True
+            else:
+                User.add(username=username, password=password)
+                auth.login(username, password)
+                return redirect('/')
+        return render_template(
+            'dark_registration.html',
             title='Зарегистрироваться',
             form=form,
             has_error=has_error
@@ -137,9 +189,7 @@ def init_route(app, db):
         if not auth.is_authorized():
             return redirect('/login')
         book = Books.query.filter_by(id=id).first()
-        if Books.user_id != auth.get_user().id:
+        if Books.user.id != auth.get_user().id:
             abort(403)
         book.delete(book)
         return redirect('/book')
-
-

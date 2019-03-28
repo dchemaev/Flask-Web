@@ -14,7 +14,7 @@
     {% if auth_user %}
     {{ auth_user.login }} (<a href="/logout">Выйти</a>)
     {% else %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a href="/" class="navbar-brand">Главная</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
@@ -31,10 +31,10 @@
     {{ auth_user.login }} (<a href="/logout">Выйти</a>)
     {% else %}
     <div class="p-3">
-        <a href="/login">Войти</a>
+        <a href="/dark_login">Войти</a>
     </div>
     <div class="p-3">
-        <a href="/user/create">Зарегистрироваться</a>
+        <a href="/user/dark_create">Зарегистрироваться</a>
     </div>
     {% endif %}
 </nav>
@@ -46,11 +46,13 @@
 </html>
 
 
+<style>
+  body { background: url(static/,.jpg); }
+</style>
+
 <div class="row">
-
     <div class="col align-self-center">
-
-        <h2><b><font face="Helvetica" color="Black">Авторизуйтесь для того, чтобы иметь возможность добавлять книги и, а затем делиться ими</font></b></h2>
+        <h2><b><font face="Helvetica" color="White">Авторизуйтесь для того, чтобы иметь возможность добавлять книги и, а затем делиться ими</font></b></h2>
 
         <h1>                     <img class="fig" src="static/main.jpg" alt="Ошибка загрузки картики"></h1>
         <!--<h3>Список доступных книг:</h3>-->

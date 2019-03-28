@@ -11,30 +11,30 @@
     <title>{{title}}</title>
 </head>
 <body>
-    {% if auth_user %}
-    {{ auth_user.login }} (<a href="/logout">Выйти</a>)
-    {% else %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/" class="navbar-brand">Главная</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="/user/dark_create" class="nav-link">Темная тема</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/user/create" class="nav-link">Светлая тема</a>
-                    </li>
-                </ul>
-            </div>
-            {% endif %}
+{% if auth_user %}
+{{ auth_user.login }} (<a href="/logout">Выйти</a>)
+{% else %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="/dark_index" class="navbar-brand">Главная</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="/user/dark_create" class="nav-link">Темная тема</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user/create" class="nav-link">Светлая тема</a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
     {% if auth_user %}
     {{ auth_user.login }} (<a href="/logout">Выйти</a>)
     {% else %}
     <div class="p-3">
-        <a href="/login">Войти</a>
+        <a href="/dark_login">Войти</a>
     </div>
     <div class="p-3">
-        <a href="/user/create">Зарегистрироваться</a>
+        <a href="/user/dark_create">Зарегистрироваться</a>
     </div>
     {% endif %}
 </nav>
@@ -46,18 +46,17 @@
 </html>
 
 
+    <style>
+      body { background: url(static/,.jpg); }
+    </style>
 
-<form
-        action="/user/create"
-        method="post"
-        enctype="multipart/form-data"
+<form action="/user/dark_create" method="post" enctype="multipart/form-data" class="card">
 
-        class="card"
->
     {% if has_error %}
-        <div class="alert alert-danger">Пользователь с таким именем уже существует</div>
-        {% endif %}
+    <div class="alert alert-danger">Пользователь с таким именем уже существует</div>
+    {% endif %}
     {{ form.hidden_tag() }}
+
     <div class="card-body">
         <div class="form-group">
             <label for="{{ form.username.id }}">{{ form.username.label }}</label>
@@ -70,5 +69,6 @@
         {{ form.submit(class_="btn btn-primary") }}
     </div>
 </form>
+
 
 
