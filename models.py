@@ -31,7 +31,6 @@ class Books(db.Model):
     # Пользователь пишет Новость(их может быть несколько), Новость принадлежит Пользователю, свзяь Один-Ко-Многим
     user = db.relationship('User', backref=db.backref('books_list', lazy=True))
     link = db.Column(db.String, unique=False, nullable=False)
-    source = db.Column(db.String, unique=False, nullable=False)
 
     # ссылка на модель (класс) выше
     # для User возвращает список его новостей по .user_news
@@ -40,8 +39,8 @@ class Books(db.Model):
         return '<Books {} {} {}>'.format(self.id, self.title, self.user_id)
 
     @staticmethod
-    def add(title, author, content, link, source, user):
-        book = Books(title=title, author=author, content=content, link=link, source=source, user=user)
+    def add(title, author, content, link, user):
+        book = Books(title=title, author=author, content=content, link=link, user=user)
         db.session.add(book)
         db.session.commit()
         return book
@@ -60,6 +59,5 @@ class Books(db.Model):
             'author': self.author,
             'content': self.content,
             'link': self.link,
-            'source': self.source,
             'user_id': self.user_id
         }

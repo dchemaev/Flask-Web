@@ -167,8 +167,7 @@ def init_route(app, db):
             author = form.author.data
             content = form.content.data
             link = form.link.data
-            source = form.source.data
-            Books.add(title=title, author=author, content=content, link=link, source=source, user=auth.get_user())
+            Books.add(title=title, author=author, content=content, link=link, user=auth.get_user())
             return redirect('/')
         return render_template(
             'books-create.html',
