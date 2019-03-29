@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="/dark_index" class="navbar-brand">Главная</a>
+        <a href="/dark_books" class="navbar-brand">Главная</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -47,8 +47,7 @@
         <ul class="card-text">
             {% for book in books_list %}
             <li><h4><b><a href="/book/{{ book.id }}"> <font face="Helvetica" color="White">{{book.title}}</font></a></b></h4>
-                <img src={{book.link}} alt="Ошибка загрузки картики">
-
+                <img src={{book.link}} width="215" height="300" alt="Ошибка загрузки картики">
                 {% if auth_user and auth_user.id == book.user_id %}
                 (<a href="/book/delete/{{ book.id }}"><b> <font face="Helvetica" color="Brown">Удалить книгу</font></b></a>)
                 <p></p>
@@ -62,7 +61,7 @@
         Книг пока нет
         {% endif %}
         {% if auth_user %}
-            <a href="/book/create" class="card-link">Создать</a>
+            <a href="/book/dark_create" class="card-link">Создать</a>
         {% endif %}
     </div>
 </div>

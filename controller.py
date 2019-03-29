@@ -175,6 +175,24 @@ def init_route(app, db):
             form=form
         )
 
+    @app.route('/book/dark_create', methods=['GET', 'POST'])
+    def dark_Books_create_form():
+        if not auth.is_authorized():
+            return redirect('/login')
+        form = BooksCreateForm()
+        if form.validate_on_submit():
+            title = form.title.data
+            author = form.author.data
+            content = form.content.data
+            link = form.link.data
+            Books.add(title=title, author=author, content=content, link=link, user=auth.get_user())
+            return redirect('/')
+        return render_template(
+            'dark_books-create.html',
+            title='Создать книгу',
+            form=form
+        )
+
     @app.route('/book/<int:id>')
     def Books_view(id: int):
         if not auth.is_authorized():
@@ -220,7 +238,7 @@ def init_route(app, db):
         if not auth.is_authorized():
             return redirect('/login')
         book = Books.query.filter_by(id=id).first()
-        if Books.user.id != auth.get_user().id:
+        if book.user_id != auth.get_user().id:
             abort(403)
-        book.delete(book)
-        return redirect('/book')
+        Books.delete(book)
+        return redirect('/books')

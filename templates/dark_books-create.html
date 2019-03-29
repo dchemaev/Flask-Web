@@ -11,20 +11,19 @@
     <title>{{title}}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="/" class="navbar-brand">Главная</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="/dark_index" class="navbar-brand">Главная</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="/dark_login" class="nav-link">Темная тема</a>
+                    <a href="/book/dark_create" class="nav-link">Темная тема</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/login" class="nav-link">Светлая тема</a>
+                    <a href="/book/create" class="nav-link">Светлая тема</a>
                 </li>
             </ul>
         </div>
         {{ auth_user.login }} (<a href="/logout">Выйти</a>)
-
 
 </nav>
 <div class="container pt-5">
@@ -35,12 +34,13 @@
 </html>
 
 
-<form
-        action="/book/create"
-        method="post"
-        enctype="multipart/form-data"
 
-        class="card"
+
+<style>
+    body { background: url(static/,.jpg); }
+</style>
+
+<form action="/book/dark_create" method="post" enctype="multipart/form-data" class="dark-card"
 >
     {{ form.hidden_tag() }}
     <div class="card-body">
@@ -63,4 +63,3 @@
         {{ form.submit(class_="btn btn-primary") }}
     </div>
 </form>
-

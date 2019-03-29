@@ -11,32 +11,20 @@
     <title>{{title}}</title>
 </head>
 <body>
-    {% if auth_user %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="/dark_books" class="navbar-brand">Главная</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/book/dark_create" class="nav-link">Темная тема</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/book/create" class="nav-link">Светлая тема</a>
+                </li>
+            </ul>
+        </div>
+
     {{ auth_user.login }} (<a href="/logout">Выйти</a>)
-    {% else %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="/dark_index" class="navbar-brand">Главная</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="/dark_book/<int:id>" class="nav-link">Темная тема</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/book/<int:id>" class="nav-link">Светлая тема</a>
-                    </li>
-                </ul>
-            </div>
-            {% endif %}
-    {% if auth_user %}
-    {{ auth_user.login }} (<a href="/logout">Выйти</a>)
-    {% else %}
-    <div class="p-3">
-        <a href="/dark_login">Войти</a>
-    </div>
-    <div class="p-3">
-        <a href="/user/dark_create">Зарегистрироваться</a>
-    </div>
-    {% endif %}
 </nav>
 <div class="container pt-5">
     {% block content %}
@@ -48,6 +36,8 @@
 <style>
   body { background: url(static/,.jpg); }
 </style>
+
+
 
 {% block content %}
 <div class="card">
