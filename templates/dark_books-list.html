@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"
+    >
+    <title>{{title}}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="/dark_index" class="navbar-brand">Главная</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/dark_books" class="nav-link">Темная тема</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/books" class="nav-link">Светлая тема</a>
+                </li>
+            </ul>
+        </div>
+        {{ auth_user.login }} (<a href="/logout">Выйти</a>)
+
+</nav>
+<div class="container pt-5">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
+
+
+
+
+<style>
+    body { background: url(static/,.jpg); }
+</style>
+
+<div class="dark_card">
+    <div class="dark_card-body">
+
+        <h1 class="card-title" ><font color="White">Мои книги:</font></h1>
+        {% if books_list %}
+        <ul class="card-text">
+            {% for book in books_list %}
+            <li><h4><b><a href="/book/{{ book.id }}"> <font face="Helvetica" color="White">{{book.title}}</font></a></b></h4>
+                <img src={{book.link}} alt="Ошибка загрузки картики">
+
+                {% if auth_user and auth_user.id == book.user_id %}
+                (<a href="/book/delete/{{ book.id }}"><b> <font face="Helvetica" color="Brown">Удалить книгу</font></b></a>)
+                <p></p>
+                <p></p>
+
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        Книг пока нет
+        {% endif %}
+        {% if auth_user %}
+            <a href="/book/create" class="card-link">Создать</a>
+        {% endif %}
+    </div>
+</div>
