@@ -46,19 +46,19 @@
 </html>
 
 
-    <style>
-      body { background: url(static/,.jpg); }
-    </style>
+<style>
+  body { background: url(static/,.jpg); }
+</style>
 
-<form action="/user/dark_create" method="post" enctype="multipart/form-data" class="card">
+<form action="/user/dark_create" method="post"  class="card" enctype="multipart/form-data">
 
     {% if has_error %}
     <div class="alert alert-danger">Пользователь с таким именем уже существует</div>
     {% endif %}
     {{ form.hidden_tag() }}
 
-    <div class="card-body">
-        <div class="form-group">
+    <div class="card-body" >
+        <div class="form-group" >
             <label for="{{ form.username.id }}">{{ form.username.label }}</label>
             {{ form.username(class_="form-control") }}
         </div>
