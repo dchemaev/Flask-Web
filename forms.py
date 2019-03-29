@@ -8,6 +8,7 @@ class BooksCreateForm(FlaskForm):
     author = StringField('Автор Книги', validators=[DataRequired()])
     content = TextAreaField('Описание', validators=[DataRequired()])
     link = StringField('Ссылка на источник', validators=[DataRequired()])
+    source = StringField('Ссылка на источник', validators=[DataRequired()])
     submit = SubmitField('Добавить')
 
 

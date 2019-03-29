@@ -1,41 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous"
-    >
-    <title>{{title}}</title>
-</head>
-<body>
-    {% if auth_user %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/" class="navbar-brand">Главная</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="/dark_book/<int:id>" class="nav-link">Темная тема</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/book/<int:id>" class="nav-link">Светлая тема</a>
-                    </li>
-                </ul>
-            </div>
-            {% endif %}
-    {% if auth_user %}
-    {{ auth_user.login }} (<a href="/logout">Выйти</a>)
-    {% else %}
-</nav>
-<div class="container pt-5">
-    {% block content %}
-    {% endblock %}
-</div>
-</body>
-</html>
-
+{% extends "__base_template.html" %}
 
 {% block content %}
 <div class="card">
@@ -44,12 +7,10 @@
         <div class="card-text mb-1">
             {{ book.content }}
         </div>
-        <div class="card-text mb-1">
-            {{ book.link }}
-        </div>
         {% if user %}
         Автор: {{ book.author }}
         {% endif %}
+        <p><a href={{ book.source }}>Текст</a></p>
     </div>
 </div>
 

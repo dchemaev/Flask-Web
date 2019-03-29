@@ -167,7 +167,8 @@ def init_route(app, db):
             author = form.author.data
             content = form.content.data
             link = form.link.data
-            Books.add(title=title, author=author, content=content, link=link, user=auth.get_user())
+            source = form.source.data
+            Books.add(title=title, author=author, content=content, link=link, source=source, user=auth.get_user())
             return redirect('/')
         return render_template(
             'books-create.html',
@@ -182,7 +183,7 @@ def init_route(app, db):
         Book = Books.query.filter_by(id=id).first()
         if not Book:
             abort(404)
-        if Books.user_id != auth.get_user().id:
+        if Book.user_id != auth.get_user().id:
             abort(403)
         user = Book.user
         return render_template(
@@ -191,8 +192,8 @@ def init_route(app, db):
             book=Book,
             author=Book.author,
             content=Book.content,
-            user=user,
-            link=Book.link
+            source=Book.source,
+            user=user
         )
 
     @app.route('/dark_book/<int:id>')
@@ -220,7 +221,7 @@ def init_route(app, db):
         if not auth.is_authorized():
             return redirect('/login')
         book = Books.query.filter_by(id=id).first()
-        if Books.user.id != auth.get_user().id:
+        if book.user.id != auth.get_user().id:
             abort(403)
-        book.delete(book)
-        return redirect('/book')
+        Books.delete(book)
+        return redirect('/books')

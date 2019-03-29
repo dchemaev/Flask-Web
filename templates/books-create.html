@@ -26,6 +26,10 @@
             <label for="{{ form.link.id }}">{{ form.link.label }}</label>
             {{ form.link(class_="form-control") }}
         </div>
+        <div class="form-group">
+            <label for="{{ form.source.id }}">{{ form.source.label }}</label>
+            {{ form.source(class_="form-control") }}
+        </div>
         {{ form.submit(class_="btn btn-primary") }}
     </div>
 </form>
